@@ -6,17 +6,23 @@
     <title>@ViewData["Title"] - Prueba2</title>
 
     <environment include="Development">
-        <script src="~/lib/jquery/jquery.js"></script>
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/css/site.css" rel="stylesheet" />
+        <script src="~/lib/jquery/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/angular.js/angular.js"></script>
+        <script src="~/js/site.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/lib/jquery/jquery.min.js"></script>
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/css/site.min.css" rel="stylesheet" />
+        <script src="~/lib/jquery/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/angular.js/angular.min.js"></script>
+        <script src="~/js/site.min.js"></script>
     </environment>
 </head>
-<body>
+<body ng-app="Prueba2App">
     @RenderBody()
     @RenderSection("scripts", required: false)
 </body>

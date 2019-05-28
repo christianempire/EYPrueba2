@@ -3,25 +3,27 @@
     ViewData["Title"] = "Eliminar artículo";
 }
 
-<section>
+<section class="mt-5 pb-5" ng-controller="DeleteItemController">
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 class="mb-3 mt-3 text-center">Eliminar artículo</h1>
+                <h1 class="mb-3 text-center">Eliminar artículo</h1>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <form asp-action="Delete" class="border p-3" method="post">
+                <form class="border p-3" ng-submit="submit()">
                     <div class="form-group row">
                         <label asp-for="Code" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
-                            <input asp-for="Code" class="form-control">
+                            <input asp-for="Code" class="form-control" ng-model="item.code">
                             <span asp-validation-for="Code" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div asp-validation-summary="ModelOnly" class="col-sm-10 text-danger offset-sm-2"></div>
+                        <div class="col text-center">
+                            <span class="text-danger" ng-cloak>{{error}}</span>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <div class="col text-center">

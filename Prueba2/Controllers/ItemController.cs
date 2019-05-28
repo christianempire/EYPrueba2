@@ -24,8 +24,7 @@ namespace Prueba2.Controllers
 
         [HttpPost]
         [Route("insertar")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Insert([FromForm]ItemInsertModel model)
+        public async Task<IActionResult> Insert([FromBody]ItemInsertModel model)
         {
             try
             {
@@ -36,9 +35,7 @@ namespace Prueba2.Controllers
 
                     if (item != null)
                     {
-                        ModelState.AddModelError("", "Un artículo con este código ya existe.");
-
-                        return View(model);
+                        return BadRequest("Un artículo con este código ya existe.");
                     }
 
                     // Insertar el nuevo artículo en la base de datos
@@ -53,15 +50,17 @@ namespace Prueba2.Controllers
                     // Guardar cambios y volver al inicio
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Home");
+                    return Ok(model);
+                }
+                else
+                {
+                    return BadRequest("Datos incorrectos.");
                 }
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("", "Error en base de datos.");
+                return BadRequest("Error en base de datos.");
             }
-
-            return View(model);
         }
 
         [Route("modificar")]
@@ -72,8 +71,7 @@ namespace Prueba2.Controllers
 
         [HttpPost]
         [Route("modificar")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update([FromForm]ItemUpdateModel model)
+        public async Task<IActionResult> Update([FromBody]ItemUpdateModel model)
         {
             try
             {
@@ -84,9 +82,7 @@ namespace Prueba2.Controllers
 
                     if (item == null)
                     {
-                        ModelState.AddModelError("", $"No existe ningún artículo con código {model.Code}.");
-
-                        return View(model);
+                        return BadRequest($"No existe ningún artículo con código {model.Code}.");
                     }
 
                     // Modificar los campos del artículo que se desean modificar
@@ -108,15 +104,17 @@ namespace Prueba2.Controllers
                     // Guardar cambios y volver al inicio
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Home");
+                    return Ok(model);
+                }
+                else
+                {
+                    return BadRequest("Datos incorrectos.");
                 }
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("", "Error en base de datos.");
+                return BadRequest("Error en base de datos.");
             }
-
-            return View(model);
         }
 
         [Route("eliminar")]
@@ -127,8 +125,7 @@ namespace Prueba2.Controllers
 
         [HttpPost]
         [Route("eliminar")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete([FromForm]ItemDeleteModel model)
+        public async Task<IActionResult> Delete([FromBody]ItemDeleteModel model)
         {
             try
             {
@@ -139,9 +136,7 @@ namespace Prueba2.Controllers
 
                     if (item == null)
                     {
-                        ModelState.AddModelError("", $"No existe ningún artículo con código {model.Code}.");
-
-                        return View(model);
+                        return BadRequest($"No existe ningún artículo con código {model.Code}.");
                     }
 
                     // Eliminar el artículo de la base de datos
@@ -150,15 +145,17 @@ namespace Prueba2.Controllers
                     // Guardar cambios y volver al inicio
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Home");
+                    return Ok(model);
+                }
+                else
+                {
+                    return BadRequest("Datos incorrectos.");
                 }
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("", "Error en base de datos.");
+                return BadRequest("Error en base de datos.");
             }
-
-            return View(model);
         }
     }
 }

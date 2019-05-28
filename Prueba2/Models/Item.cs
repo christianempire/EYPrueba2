@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Prueba2.Models
@@ -23,6 +24,7 @@ namespace Prueba2.Models
     {
         [Column(TypeName = "varchar(7)")]
         [Display(Name = "Código")]
+        [JsonProperty("code")]
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string Code { get; set; }
     }
@@ -31,15 +33,19 @@ namespace Prueba2.Models
     {
         [Column(TypeName = "varchar(7)")]
         [Display(Name = "Código")]
+        [JsonProperty("code")]
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string Code { get; set; }
         [Display(Name = "Nombre")]
+        [JsonProperty("name")]
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string Name { get; set; }
         [Display(Name = "Descripción")]
+        [JsonProperty("description")]
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string Description { get; set; }
         [Display(Name = "Cantidad inicial")]
+        [JsonProperty("quantity")]
         [Range(0, int.MaxValue, ErrorMessage = "La cantidad debe ser mayor o igual a cero.")]
         [Required(ErrorMessage = "Este campo es requerido.")]
         public int Quantity { get; set; }
@@ -49,13 +55,17 @@ namespace Prueba2.Models
     {
         [Column(TypeName = "varchar(7)")]
         [Display(Name = "Código")]
+        [JsonProperty("code")]
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string Code { get; set; }
         [Display(Name = "Nombre")]
+        [JsonProperty("name")]
         public string Name { get; set; }
         [Display(Name = "Descripción")]
+        [JsonProperty("description")]
         public string Description { get; set; }
         [Display(Name = "Cantidad")]
+        [JsonProperty("quantity")]
         [Range(0, int.MaxValue, ErrorMessage = "La cantidad debe ser mayor o igual a cero.")]
         public int? Quantity { get; set; }
     }
